@@ -2,7 +2,7 @@ import ddf.minim.*;
 import ddf.minim.analysis.*;
 
 Minim minim;
-boolean song_mic=true;
+boolean song_mic=false;
 AudioPlayer song;  
 AudioInput mic;
 // Frame length

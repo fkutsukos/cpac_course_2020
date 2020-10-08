@@ -9,7 +9,7 @@ import ctypes, sys
 
 
 from your_code import simple_next, gingerbread_randomness, gingerbread
-from constants import STATUS_START
+from constants import ID_START
 
 def note_sleep(BPM, beats):
 	time.sleep(beats*60./BPM)
@@ -25,16 +25,16 @@ class InstrOSC():
 		print("sending %s"%str(data))
 		self.client.send_message(self.name, data)
     
-class Status:
+class Composition:
 	def __init__(self):
-		self.current=STATUS_START
-		self.midinote=STATUS_START
+		self.id=ID_START
+		self.midinote=ID_START
 		self.dur=0
 		self.amp=0
 		self.BPM=120.
 		self.pars={}
 	def __str__(self):
-		return "\n\t".join(["Status: %d"%self.current, 
+		return "\n\t".join(["Id: %d"%self.id, 
 								"midinote: %d"%self.midinote, 
 								"duration: %s beats"%str(self.dur),
 								"amplitude: %.1f"%self.amp,
@@ -42,17 +42,17 @@ class Status:
 								"pars: %s"%str(self.pars)])
 class Agent(Thread):
 	def __init__(self, port, name, BPM, func, ):
-		self.status=Status()
+		self.comp=Composition()
 		super().__init__(daemon=True, target=self.action)
 		self.instr=InstrOSC(port=port, name=name)				
-		self.status.BPM=BPM
+		self.comp.BPM=BPM
 		self.func=func
 		self.stop=Event()
 		self.stop.clear()
 		#self.planning()
 	
 	def planning(self):
-		self.func(self.status)
+		self.func(self.comp)
 	def kill(self):
 		# before killing it, I set the amplitude to 0
 			
@@ -61,11 +61,11 @@ class Agent(Thread):
 	def action(self):
 		while not self.stop.is_set():
 			self.planning()
-			print(str(self.status))			
-			self.instr.send("note", self.status.midinote,							
-							self.status.amp)
-			note_sleep(self.status.BPM, self.status.dur)
-		self.instr.send("note", self.status.midinote,							
+			print(str(self.comp))			
+			self.instr.send("note", self.comp.midinote,							
+							self.comp.amp)
+			note_sleep(self.comp.BPM, self.comp.dur)
+		self.instr.send("note", self.comp.midinote,							
 							0)
 
 

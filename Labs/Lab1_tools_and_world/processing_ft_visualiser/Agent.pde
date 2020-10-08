@@ -4,15 +4,7 @@ int HEIGHT=720;
 int SMOOTHING_WINDOW = 10;
 int MARGIN;
 
-float[] create_zero_buffer(){
-  float[] buffer = new float[SMOOTHING_WINDOW];
-  for (int i=0; i<SMOOTHING_WINDOW; i++){
-    buffer[i]=0.;
-  }
-  return buffer;
-}
-float compute_flatness(FFT fft, float sum_of_spectrum){  
- 
+float compute_flatness(FFT fft, float sum_of_spectrum){   
   // using several products will get overflow;
   // so instead of computing the harmonic mean, 
   // we compute the exponential of the average of the logarithms

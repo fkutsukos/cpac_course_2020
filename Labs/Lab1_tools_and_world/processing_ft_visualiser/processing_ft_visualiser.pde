@@ -2,7 +2,7 @@ import ddf.minim.*;
 import ddf.minim.analysis.*;
 
 Minim minim;
-boolean song_mic=true;
+boolean song_mic=false;
 AudioPlayer song;  
 AudioInput mic;
 // Frame length
@@ -16,9 +16,9 @@ void setup()
   size(1280, 720);
   background(0);
   smooth();
-  //frameRate(refresh*60);
   minim = new Minim(this);
   if(song_mic){   
+    /* put any file you like here*/
     song = minim.loadFile("../../../data/mashup.mp3",frameLength);  
     feat = new AgentFeature(song.bufferSize(), song.sampleRate());
     song.play();     

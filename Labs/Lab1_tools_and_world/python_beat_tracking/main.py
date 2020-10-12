@@ -11,7 +11,7 @@ from librosa.onset import onset_strength
 
 os.chdir(os.path.abspath(os.path.dirname(__file__)))
 # This is useful to change the current directory to the one where there is the file
-import your_code
+import /python_beatyour_code
 import utils
 
 DATA_DIR="../../../data"

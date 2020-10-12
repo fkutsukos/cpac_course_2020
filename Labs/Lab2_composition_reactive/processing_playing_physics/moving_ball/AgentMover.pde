@@ -15,7 +15,10 @@ class AgentMover{
   }
   void update(){    
     PVector delta = new PVector(mouseX, mouseY);
-    /* your code */
+    PVector deltaM = delta.sub(this.position);
+    delta.sub(this.position);
+    delta.div(CONSTANT_ACC*delta.mag());
+    this.acceleration = deltaM;
     
     this.velocity.add(this.acceleration);
     this.velocity.limit(LIMIT_VELOCITY);

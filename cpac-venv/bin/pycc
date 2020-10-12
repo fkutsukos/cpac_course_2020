@@ -1,0 +1,3 @@
+#!/Users/fotis/Documents/POLITECNICO/2020-21 A/CPC/cpac_course_2020/cpac-venv/bin/python3
+from numba.pycc import main
+main()

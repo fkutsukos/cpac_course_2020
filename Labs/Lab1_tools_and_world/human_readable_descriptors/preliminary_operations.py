@@ -18,7 +18,7 @@ if "token" not in locals(): # if you have not inserted the token
 header={"Authorization": "Bearer %s"%token}
 # %% Search api: first info
 
-params={"q": "Staying alive bee gees", "type": "track"}
+params={"q": "think about things", "type": "track"}
 search_url="https://api.spotify.com/v1/search"
 req=requests.get(url=search_url, params=params,headers=header)
 assert req.status_code==200, req.content

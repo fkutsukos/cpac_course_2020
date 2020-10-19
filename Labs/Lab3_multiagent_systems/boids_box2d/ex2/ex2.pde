@@ -4,8 +4,8 @@ import org.jbox2d.common.*;
 import org.jbox2d.dynamics.*;
 import org.jbox2d.dynamics.contacts.*;
 
-boolean DRAW_PATH=true;
-boolean DRAW_ANCHORS=true;
+boolean DRAW_PATH=false;
+boolean DRAW_ANCHORS=false;
 int RADIUS_BOID=30;
 float SCALEFORCE=100000;
 float DIST_TO_NEXT=50;
@@ -77,9 +77,10 @@ Vec2 computeForce(Boid b){
     direction= direction2;
   }
   // your code: compute steering
+  
   Vec2 velocity=b.body.getLinearVelocity();
 
-  Vec2 steering = new Vec2(0,0);  
+  Vec2 steering = direction.sub(velocity);  
   if(DRAW_ANCHORS){ 
     strokeWeight(2);
     stroke(255);

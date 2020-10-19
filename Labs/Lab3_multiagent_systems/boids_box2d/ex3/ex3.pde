@@ -63,7 +63,6 @@ void mousePressed() {
     boids.add(b);     
   }
   if(mouseButton==RIGHT){ 
-    ;
   }
 }
 
@@ -77,9 +76,10 @@ Vec2 computeForce(Boid b){
     direction= direction2;
   }
   // your code: compute steering
+  
   Vec2 velocity=b.body.getLinearVelocity();
 
-  Vec2 steering = new Vec2(0,0);  
+  Vec2 steering = direction.sub(velocity);  
   if(DRAW_ANCHORS){ 
     strokeWeight(2);
     stroke(255);

@@ -1,4 +1,4 @@
-
+  
 float AVOID_DIST=6;
 float ALIGN_DIST=25;
 class Boid{
@@ -21,7 +21,9 @@ class Boid{
       this.body.applyForce(force, this.body.getWorldCenter());      
     }
     void draw(){
+      
         /* your code*/
+
         Vec2 posPixel=this.box2d.getBodyPixelCoord(this.body);
        
         fill(this.defColor);
@@ -43,7 +45,15 @@ class Boid{
       for(Boid other: boids){        
         if(this.body==other.body){continue;}
         // your code
-        
+        direction = other.body.getPosition().sub(myPosW);
+        if (direction.length()<=AVOID_DIST){
+          direction.normalize();
+          avoid_force.add(direction.mul(-1));
+        }
+        else if (direction.length()<ALIGN_DIST){
+          otherVel = other.body.getLinearVelocity();
+          align_force.add(otherVel.sub(myVel));
+        }
       }
       // your code
       if(avoid_force.length()>0){this.applyForce(avoid_force);}

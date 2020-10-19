@@ -23,7 +23,7 @@ PVector computeGravityForce(AgentMover mover){
   attr_force.sub(mover.position);
   float dist=attr_force.mag();
   dist=constrain(dist, dist_min,dist_max);
-  attr_force.normalize(); 
+  attr_force.normalize(); // normalize gives the direction
   attr_force.mult(mover.mass*mass_attractor/(dist*dist));
   return attr_force;
 }
@@ -38,6 +38,9 @@ void draw(){
   PVector force;
   for(int i=0; i<N_AGENTS; i++){
     force = computeGravityForce(movers[i]);
+    movers[i].applyForce(force);
+    movers[i].update();
+    movers[i].draw();
     /* your code*/
   }
 }
